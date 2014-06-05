@@ -1,21 +1,21 @@
 package com.csc.playingcards.cards;
 
-import com.csc.playingcards.suits.SuitType;
-
 public class Card
 {
   //-------------------------
-  //chars
+  //strings
   //-------------------------
-  private char symbol;
+  public final static String ALL_SUITS = "AllSuits";
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************	
-  public Card(Rank rank, char suiteSymbol)
+  public Card(String rank, String suitName, char symbol)
   {
     setRank(rank);
 
-    symbol = suiteSymbol;
+    setSuitName(suitName);
+
+    setSymbol(symbol);
   }
   //****************************************************************************************************
   //End  - Constructor
@@ -23,23 +23,31 @@ public class Card
   //****************************************************************************************************
   //Begin  - Get/Set Methods
   //****************************************************************************************************
-
-  private String name = "n/a";
-  public String getName(){return name;}
-  public void setName(String value)
+  private String rank = "n/a";
+  public String getRank(){return rank;}
+  public void setRank(String value)
   {
-    if(value==null||value.equalsIgnoreCase(name))return;
+    if(null==value||value.equalsIgnoreCase(rank))return;
 
-    name = value;
+    rank = value;
   }
 
-  private Rank rank;
-  public Rank getRank(){return rank;}
-  public void setRank(Rank value)
+  private String suitName = "n/a";
+  public String getSuitName(){return suitName;}
+  public void setSuitName(String value)
   {
-    rank = value;
+    if(null==value||value.equalsIgnoreCase(suitName))return;
 
-    setName(rank.getValue());
+    suitName = value;
+  }
+
+  private char symbol = ' ';
+  public char getSymbol(){return symbol;}
+  public void setSymbol(char value)
+  {
+    if('\u0000'==value||symbol==value)return;
+
+    symbol = value;
   }
   //****************************************************************************************************
   //End - Get/Set Methods
@@ -49,7 +57,7 @@ public class Card
   //****************************************************************************************************
   public String toString()
   {
-    String value = getName()+symbol;
+    String value = rank+symbol;
 
     return value;
   }

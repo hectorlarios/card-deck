@@ -14,7 +14,8 @@ public class StartGame
         new GhettoSpadesDeck(),
         new StandardDeck(),
         new PinochleDeck(),
-        new PiquetDeck()
+        new PiquetDeck(),
+        new MagicTheGatheringDeck()
       };
 
     for (Deck deck : decks)

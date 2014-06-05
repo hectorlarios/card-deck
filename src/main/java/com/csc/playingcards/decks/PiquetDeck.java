@@ -1,9 +1,15 @@
 package com.csc.playingcards.decks;
 
-import com.csc.playingcards.cards.Rank;
+import com.csc.playingcards.cards.Card;
+
+import java.util.HashMap;
 
 public class PiquetDeck extends StandardDeck
 {
+  //-------------------------
+  //strings
+  //-------------------------
+  public final static String PIQUET = "Piquet";
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************
@@ -18,19 +24,21 @@ public class PiquetDeck extends StandardDeck
   //Begin  - Protected Methods
   //****************************************************************************************************
   @Override
-  protected void createCardRanks()
-  {
-    cardRanks = new Rank[]
-      {
-        Rank.ACE,
-        Rank.KING,
-        Rank.QUEEN,
-        Rank.JACK,
-        Rank.TEN,
-        Rank.NINE,
-        Rank.EIGHT,
-        Rank.SEVEN
-      };
+  protected void createCardRanks() {
+    ranks = new HashMap<String, String[]>();
+    ranks.put(Card.ALL_SUITS,
+      new String[]
+        {
+          ACE,
+          KING,
+          QUEEN,
+          JACK,
+          TEN,
+          NINE,
+          EIGHT,
+          SEVEN
+        }
+    );
   }
   //****************************************************************************************************
   //End - Protected Methods

@@ -1,10 +1,15 @@
 package com.csc.playingcards.decks;
 
-import com.csc.playingcards.cards.Rank;
-import com.csc.playingcards.suits.SuitType;
+import com.csc.playingcards.cards.Card;
 
-public class PinochleDeck extends Deck
+import java.util.HashMap;
+
+public class PinochleDeck extends StandardDeck
 {
+  //-------------------------
+  //strings
+  //-------------------------
+  public final static String PINOCHLE = "Pinochle";
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************
@@ -19,32 +24,25 @@ public class PinochleDeck extends Deck
   //Begin  - Protected Methods
   //****************************************************************************************************
   @Override
-  protected void createSuiteTypes() {
-    suitTypes = new SuitType[]
-      {
-        SuitType.Spades,
-        SuitType.Hearts,
-        SuitType.Diamonds,
-        SuitType.Clubs,
-        SuitType.Spades,
-        SuitType.Hearts,
-        SuitType.Diamonds,
-        SuitType.Clubs
-      };
-  }
-
-  @Override
-  protected void createCardRanks()
-  {
-    cardRanks = new Rank[]
-      {
-        Rank.ACE,
-        Rank.TEN,
-        Rank.KING,
-        Rank.QUEEN,
-        Rank.JACK,
-        Rank.NINE
-      };
+  protected void createCardRanks() {
+    ranks = new HashMap<String, String[]>();
+    ranks.put(Card.ALL_SUITS,
+      new String[]
+        {
+          ACE,
+          TEN,
+          KING,
+          QUEEN,
+          JACK,
+          NINE,
+          ACE,
+          TEN,
+          KING,
+          QUEEN,
+          JACK,
+          NINE
+        }
+    );
   }
   //****************************************************************************************************
   //End - Protected Methods

@@ -1,28 +1,21 @@
 package com.csc.playingcards.decks;
 
 import com.csc.playingcards.cards.Card;
-import com.csc.playingcards.cards.Rank;
-import com.csc.playingcards.suits.Suit;
-import com.csc.playingcards.suits.SuitType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public abstract class Deck
 {
   //-------------------------
-  //custom classes
+  //collections
   //-------------------------
-  protected Suit[] suits;
+  protected String[] suits;
 
-  protected Rank[] cardRanks;
-  //-------------------------
-  //strings
-  //-------------------------
-  public final static String STANDARD = "Standard";
-  public final static String PIQUET = "Piquet";
-  public final static String PINOCHLE = "Pinochle";
-  public final static String GHETTO_SPADES = "Ghetto Spades";
+  protected HashMap<String,Character> symbols;
+
+  protected HashMap<String,String[]> ranks;
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************	
@@ -30,7 +23,6 @@ public abstract class Deck
   {
     preInitialize();
     initialize();
-    postInitialize();
   }
   //****************************************************************************************************
   //End  - Constructor
@@ -44,18 +36,26 @@ public abstract class Deck
   protected int totalCards;
   public int getTotalCards(){return totalCards;}
 
-  protected int totalSuits;
-  public int getTotalSuits(){return totalSuits;}
-
-  protected SuitType[] suitTypes;
-  public SuitType[] getSuitTypes(){return suitTypes;}
-
   protected Card[] cards;
   public Card[] getCards(){return cards;}
 
   public String getCardsToString()
   {
     String value = Arrays.toString(cards);
+
+    return value;
+  }
+
+  public Card[] getCardsBySuit(String suit)
+  {
+    ArrayList<Card> list = new ArrayList<Card>();
+
+    for(Card card : cards)
+    {
+      if(card.getSuitName().equalsIgnoreCase(suit))list.add(card);
+    }
+
+    Card[] value = list.toArray(new Card[list.size()]);
 
     return value;
   }
@@ -67,8 +67,6 @@ public abstract class Deck
   //****************************************************************************************************
   private Card[] mergeCards(Card[] sourceA, Card[] sourceB)
   {
-    int i;
-
     int l = sourceB.length;
 
     Card[] value = Arrays.copyOf(sourceB, l+sourceA.length);
@@ -88,78 +86,53 @@ public abstract class Deck
   //****************************************************************************************************
   protected void preInitialize()
   {
-    createSuiteTypes();
+    createCardSuits();
 
     createCardRanks();
   }
 
   protected void initialize()
   {
-    createSuites();
+    createCards();
   }
 
-  protected void postInitialize()
-  {
-    updateCards();
-  }
-
-  protected abstract void createSuiteTypes();
+  protected abstract void createCardSuits();
 
   protected abstract void createCardRanks();
 
-  protected void createSuites()
+  protected void createCards()
   {
-    int i;
+    char symbol;
 
-    totalSuits = suitTypes.length;
+    String[] rankValue;
 
-    suits = new Suit[totalSuits];
-
-    totalCards = totalSuits* cardRanks.length;
-
-    SuitType suitName;
-
-    Suit suit;
+    ArrayList<Card> temp;
 
     cards = new Card[0];
 
-    for (i = 0; i < totalSuits; i++)
+    for (String suit : suits)
     {
-      suitName = suitTypes[i];
+      symbol = symbols.get(suit);
 
-      suit = new Suit(suitName,cardRanks);
+      rankValue = ranks.get(suit);
 
-      suits[i] = suit;
-    }
-  }
-
-  protected void updateCards()
-  {
-    cards = new Card[0];
-
-    for (Suit suit : suits)
-    {
-      cards = mergeCards(suit.getCards(), cards);
-    }
-  }
-
-  protected Suit getSuitByType(SuitType type)
-  {
-    Suit value = null;
-
-    for (Suit suit : suits )
-    {
-      if(suit.getSuitType()==type)
+      if (rankValue == null)
       {
-        value = suit;
-
-        break;
+        rankValue = ranks.get(Card.ALL_SUITS);
       }
+
+      temp = new ArrayList<Card>();
+
+      for (String rank : rankValue)
+      {
+        temp.add(new Card(rank, suit, symbol));
+      }
+
+      cards = mergeCards(temp.toArray(new Card[temp.size()]), cards);
     }
 
-    return value;
+    totalCards = cards.length;
   }
-
   //****************************************************************************************************
   //End - Protected Methods
   //****************************************************************************************************
@@ -193,9 +166,15 @@ public abstract class Deck
   {
     StringBuilder value = new StringBuilder(name+" Deck: ");
 
-    for (Suit suit : suits)
+    Card[] suitCards;
+
+    for (String suit : suits)
     {
-      value.append("\n   " + suit.getName()+": " + Arrays.toString(suit.getCards()));
+      value.append("\n   " + suit + ": ");
+
+      suitCards = getCardsBySuit(suit);
+
+      if(suitCards!=null&&suitCards.length>0)value.append(Arrays.toString(suitCards));
     }
 
     value.append("\n   All Cards: " + getCardsToString());

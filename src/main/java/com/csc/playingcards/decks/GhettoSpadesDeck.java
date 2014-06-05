@@ -1,11 +1,13 @@
 package com.csc.playingcards.decks;
 
-import com.csc.playingcards.cards.Rank;
-import com.csc.playingcards.suits.Suit;
-import com.csc.playingcards.suits.SuitType;
+import java.util.HashMap;
 
 public class GhettoSpadesDeck extends StandardDeck
 {
+  //-------------------------
+  //strings
+  //-------------------------
+  public final static String GHETTO_SPADES = "Ghetto Spades";
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************	
@@ -19,58 +21,25 @@ public class GhettoSpadesDeck extends StandardDeck
   //****************************************************************************************************
   //Begin  - Private Methods
   //****************************************************************************************************
-  private Rank[] getRank(SuitType type)
+  private String[] getCommonRanks()
   {
-    Rank[] value = {
-      Rank.BIG_JOKER,
-      Rank.LITTLE_JOKER,
-      Rank.DEUCE,
-      Rank.ACE,
-      Rank.KING,
-      Rank.QUEEN,
-      Rank.JACK,
-      Rank.TEN,
-      Rank.NINE,
-      Rank.EIGHT,
-      Rank.SEVEN,
-      Rank.SIX,
-      Rank.FIVE,
-      Rank.FOUR,
-      Rank.THREE
-    };
-
-    switch (type)
-    {
-      case Hearts:
-      case Clubs:
-        value = new Rank[]
-          {
-            Rank.ACE,
-            Rank.KING,
-            Rank.QUEEN,
-            Rank.JACK,
-            Rank.TEN,
-            Rank.NINE,
-            Rank.EIGHT,
-            Rank.SEVEN,
-            Rank.SIX,
-            Rank.FIVE,
-            Rank.FOUR,
-            Rank.THREE
-          };
-        break;
-    }
+    String[] value =
+      {
+        ACE,
+        KING,
+        QUEEN,
+        JACK,
+        TEN,
+        NINE,
+        EIGHT,
+        SEVEN,
+        SIX,
+        FIVE,
+        FOUR,
+        THREE
+      };
 
     return value;
-  }
-
-  private void updateSuitRank(Suit suit)
-  {
-    if(null==suit)return;
-
-    Rank[] faceValue = getRank(suit.getSuitType());
-
-    suit.setRanks(faceValue);
   }
   //****************************************************************************************************
   //End - Private Methods
@@ -78,23 +47,52 @@ public class GhettoSpadesDeck extends StandardDeck
   //****************************************************************************************************
   //Begin  - Protected Methods
   //****************************************************************************************************
-
   @Override
-  protected void initialize()
-  {
-    super.initialize();
+  protected void createCardRanks() {
+    ranks = new HashMap<String, String[]>();
+    ranks.put(SPADES,
+      new String[]
+        {
+          BIG_JOKER,
+          LITTLE_JOKER,
+          DEUCE,
+          ACE,
+          KING,
+          QUEEN,
+          JACK,
+          TEN,
+          NINE,
+          EIGHT,
+          SEVEN,
+          SIX,
+          FIVE,
+          FOUR,
+          THREE
+        }
+    );
 
-    Suit[] updateList =
-      {
-        getSuitByType(SuitType.Spades),
-        getSuitByType(SuitType.Hearts),
-        getSuitByType(SuitType.Clubs)
-      };
+    ranks.put(DIAMONDS,
+      new String[]
+        {
+          DEUCE,
+          ACE,
+          KING,
+          QUEEN,
+          JACK,
+          TEN,
+          NINE,
+          EIGHT,
+          SEVEN,
+          SIX,
+          FIVE,
+          FOUR,
+          THREE
+        }
+    );
 
-    for (Suit suit : updateList)
-    {
-      updateSuitRank(suit);
-    }
+    ranks.put(HEARTS, getCommonRanks());
+
+    ranks.put(CLUBS, getCommonRanks());
   }
   //****************************************************************************************************
   //End - Protected Methods
