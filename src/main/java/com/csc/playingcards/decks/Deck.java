@@ -41,7 +41,31 @@ public abstract class Deck
 
   public String getCardsToString()
   {
-    String value = Arrays.toString(cards);
+    String value = "[";
+
+    String separator;
+
+    int maxColCount = cards.length/suits.length;
+
+    int count = 0;
+
+    int l = cards.length;
+
+    for(Card card : cards)
+    {
+      if((++count%maxColCount)==0)
+      {
+        separator = "]";
+
+        if(count<l)separator += "\n[";
+      }
+      else
+      {
+        separator = ", ";
+      }
+
+      value += card + separator;
+    }
 
     return value;
   }
@@ -170,14 +194,12 @@ public abstract class Deck
 
     for (String suit : suits)
     {
-      value.append("\n   " + suit + ": ");
+      value.append("\n" + suit + ": ");
 
       suitCards = getCardsBySuit(suit);
 
       if(suitCards!=null&&suitCards.length>0)value.append(Arrays.toString(suitCards));
     }
-
-    value.append("\n   All Cards: " + getCardsToString());
 
     return value.toString();
   }

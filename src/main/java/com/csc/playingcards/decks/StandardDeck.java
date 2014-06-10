@@ -37,7 +37,7 @@ public class StandardDeck extends Deck
   public final static String BIG_JOKER = "BJ";
   public final static String LITTLE_JOKER = "LJ";
 
-  public final static String STANDARD = "Standard";
+  private final String STANDARD = "Standard";
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************	

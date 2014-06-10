@@ -9,7 +9,7 @@ public class PiquetDeck extends StandardDeck
   //-------------------------
   //strings
   //-------------------------
-  public final static String PIQUET = "Piquet";
+  private final String PIQUET = "Piquet";
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************

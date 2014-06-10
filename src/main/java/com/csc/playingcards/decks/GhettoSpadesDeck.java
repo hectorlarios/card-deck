@@ -1,5 +1,7 @@
 package com.csc.playingcards.decks;
 
+import com.csc.playingcards.cards.Card;
+
 import java.util.HashMap;
 
 public class GhettoSpadesDeck extends StandardDeck
@@ -7,7 +9,7 @@ public class GhettoSpadesDeck extends StandardDeck
   //-------------------------
   //strings
   //-------------------------
-  public final static String GHETTO_SPADES = "Ghetto Spades";
+  private final String GHETTO_SPADES = "Ghetto Spades";
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************	
@@ -17,32 +19,6 @@ public class GhettoSpadesDeck extends StandardDeck
   }
   //****************************************************************************************************
   //End  - Constructor
-  //****************************************************************************************************
-  //****************************************************************************************************
-  //Begin  - Private Methods
-  //****************************************************************************************************
-  private String[] getCommonRanks()
-  {
-    String[] value =
-      {
-        ACE,
-        KING,
-        QUEEN,
-        JACK,
-        TEN,
-        NINE,
-        EIGHT,
-        SEVEN,
-        SIX,
-        FIVE,
-        FOUR,
-        THREE
-      };
-
-    return value;
-  }
-  //****************************************************************************************************
-  //End - Private Methods
   //****************************************************************************************************
   //****************************************************************************************************
   //Begin  - Protected Methods
@@ -90,9 +66,23 @@ public class GhettoSpadesDeck extends StandardDeck
         }
     );
 
-    ranks.put(HEARTS, getCommonRanks());
-
-    ranks.put(CLUBS, getCommonRanks());
+    ranks.put(Card.ALL_SUITS,
+      new String[]
+        {
+          ACE,
+          KING,
+          QUEEN,
+          JACK,
+          TEN,
+          NINE,
+          EIGHT,
+          SEVEN,
+          SIX,
+          FIVE,
+          FOUR,
+          THREE
+        }
+    );
   }
   //****************************************************************************************************
   //End - Protected Methods

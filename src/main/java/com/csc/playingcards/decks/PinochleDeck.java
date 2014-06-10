@@ -9,7 +9,7 @@ public class PinochleDeck extends StandardDeck
   //-------------------------
   //strings
   //-------------------------
-  public final static String PINOCHLE = "Pinochle";
+  private final String PINOCHLE = "Pinochle";
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************

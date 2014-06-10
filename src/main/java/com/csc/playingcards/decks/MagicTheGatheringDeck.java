@@ -1,7 +1,5 @@
 package com.csc.playingcards.decks;
 
-import com.csc.playingcards.cards.Card;
-
 import java.util.HashMap;
 
 public class MagicTheGatheringDeck extends Deck
@@ -20,7 +18,7 @@ public class MagicTheGatheringDeck extends Deck
   public final static String BLACK = "Black";
   public final static String GREEN = "Green";
 
-  public final static String MAGIC_THE_GATHERING = "Magic: The Gathering";
+  private final String MAGIC_THE_GATHERING = "Magic: The Gathering";
   //****************************************************************************************************
   //Begin - Constructor
   //****************************************************************************************************	
@@ -58,7 +56,39 @@ public class MagicTheGatheringDeck extends Deck
   @Override
   protected void createCardRanks() {
     ranks = new HashMap<String, String[]>();
-    ranks.put(Card.ALL_SUITS,
+    ranks.put(RED,
+      new String[]
+        {
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT),
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT),
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT)
+        }
+    );
+    ranks.put(BLUE,
+      new String[]
+        {
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT),
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT),
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT)
+        }
+    );
+    ranks.put(WHITE,
+      new String[]
+        {
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT),
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT),
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT)
+        }
+    );
+    ranks.put(BLACK,
+      new String[]
+        {
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT),
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT),
+          getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT)
+        }
+    );
+    ranks.put(GREEN,
       new String[]
         {
           getRandomRank(INSTANT),getRandomRank(SORCERY),getRandomRank(CREATURE),getRandomRank(ENCHANTMENT),
